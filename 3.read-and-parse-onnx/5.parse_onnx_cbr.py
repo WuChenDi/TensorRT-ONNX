@@ -128,7 +128,7 @@ def export_norm_onnx() -> None:
 
     Note:
         - Exports a CBR model with input shape (1, 3, 5, 5).
-        - Saves to '../models/sample-cbr.onnx' with opset_version 15.
+        - Saves to './models/sample-cbr.onnx' with opset_version 15.
         - Input name: 'input0', output name: 'output0'.
     """
     try:

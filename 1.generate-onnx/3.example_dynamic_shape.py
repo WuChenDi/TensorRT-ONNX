@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.onnx
-import os
+from utils import get_onnx_path
 
 class Model(torch.nn.Module):
     """A simple linear model with custom weights and optional bias."""
@@ -48,10 +48,6 @@ def infer(weights):
 
 def export_onnx(weights):
     """Export the linear model to ONNX format with dynamic batch size."""
-    # Create directory for saving the model
-    model_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "models")
-    os.makedirs(model_dir, exist_ok=True)  # Create directory if it doesn't exist
-
     # Define dummy input for ONNX export (batch_size, in_features)
     input = torch.zeros(1, 4)  # Corrected shape to match model input
     
@@ -60,7 +56,7 @@ def export_onnx(weights):
     model.eval()  # Set to evaluation mode for stable export
 
     # Define output path for ONNX model
-    output_path = os.path.join(model_dir, "example_dynamic_shape.onnx")
+    output_path = get_onnx_path(__file__, "example_dynamic_shape.onnx")
 
     # Export model to ONNX format
     torch.onnx.export(

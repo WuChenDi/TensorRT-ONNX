@@ -18,7 +18,6 @@
 import numpy as np
 import onnx
 from onnx import helper, TensorProto
-import os
 from typing import List
 from numpy import ndarray
 from utils import get_onnx_path

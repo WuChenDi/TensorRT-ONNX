@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.onnx
 import onnxsim
 import onnx
-import os
+from utils import get_onnx_path
 
 class Model(nn.Module):
     """A convolutional neural network with two conv blocks, adaptive pooling, and a linear head."""
@@ -66,10 +66,6 @@ def infer():
 
 def export_norm_onnx():
     """Export the model to ONNX format and validate it."""
-    # Create directory for saving the model
-    model_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "models")
-    os.makedirs(model_dir, exist_ok=True)  # Create directory if it doesn't exist
-
     # Define dummy input for ONNX export (batch_size, channels, height, width)
     input_tensor = torch.rand(1, 3, 64, 64)
     
@@ -78,7 +74,7 @@ def export_norm_onnx():
     model.eval()  # Set to evaluation mode for stable export
 
     # Define output path for ONNX model
-    output_path = os.path.join(model_dir, "sample-reshape.onnx")
+    output_path = get_onnx_path(__file__, "sample-reshape.onnx")
 
     # Export model to ONNX format
     # Note: torch.flatten generates shape->slice->concat->reshape nodes in ONNX.

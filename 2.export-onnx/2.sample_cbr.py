@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.onnx
-import os
+from utils import get_onnx_path
 
 class Model(nn.Module):
     """A simple convolutional block with Conv2d, BatchNorm2d, and ReLU activation."""
@@ -49,10 +49,6 @@ def infer():
 
 def export_norm_onnx():
     """Export the convolutional model to ONNX format."""
-    # Create directory for saving the model
-    model_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "models")
-    os.makedirs(model_dir, exist_ok=True)  # Create directory if it doesn't exist
-
     # Define dummy input for ONNX export (batch_size, channels, height, width)
     input_tensor = torch.rand(1, 3, 5, 5)
     
@@ -61,7 +57,7 @@ def export_norm_onnx():
     model.eval()  # Set to evaluation mode for stable export
 
     # Define output path for ONNX model
-    output_path = os.path.join(model_dir, "sample-cbr.onnx")
+    output_path = get_onnx_path(__file__, "sample-cbr.onnx")
 
     # Export model to ONNX format
     # Note: During export with do_constant_folding=True, BatchNorm2d may be fused with Conv2d

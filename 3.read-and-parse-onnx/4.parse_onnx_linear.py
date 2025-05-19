@@ -2,6 +2,7 @@ import onnx
 import os
 from onnx import TensorProto
 from typing import Dict
+from utils import get_onnx_path
 
 def get_tensor_dtype(tensor_type: int) -> str:
     """Map TensorProto data type to a readable string.
@@ -29,7 +30,7 @@ def get_tensor_dtype(tensor_type: int) -> str:
 def main() -> None:
     """Load and parse an ONNX model, printing its inputs, outputs, nodes, and initializers."""
     # Define model path
-    model_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".", "models", "sample-linear.onnx")
+    model_path = get_onnx_path(__file__, "sample-linear.onnx")
 
     # Load and validate model
     try:
