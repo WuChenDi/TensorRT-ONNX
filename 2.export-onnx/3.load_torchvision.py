@@ -5,7 +5,7 @@ import onnxsim
 import onnx
 import os
 import argparse
-import torchvision
+import torchvision  # Required for loading pre-trained vision models
 
 def get_model(type, dir):
     """
