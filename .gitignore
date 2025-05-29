@@ -29,8 +29,6 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
-*_zh.md
-*_zh.py
 *_zh.onnx
 
 # PyInstaller
