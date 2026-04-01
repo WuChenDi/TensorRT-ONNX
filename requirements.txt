@@ -1,5 +1,5 @@
 torch==2.7.0
 numpy==2.2.5
-onnx==1.18.0
+onnx==1.21.0
 onnxsim==0.4.36
 torchvision==0.22.0
